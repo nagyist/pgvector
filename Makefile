@@ -27,6 +27,11 @@ ifneq ($(filter ppc64%, $(shell uname -m)), )
 	OPTFLAGS =
 endif
 
+# RISC-V64 doesn't support -march=native
+ifeq ($(shell uname -m), riscv64)
+	OPTFLAGS =
+endif
+
 # For auto-vectorization:
 # - GCC (needs -ftree-vectorize OR -O3) - https://gcc.gnu.org/projects/tree-ssa/vectorization.html
 # - Clang (could use pragma instead) - https://llvm.org/docs/Vectorizers.html
